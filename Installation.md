@@ -28,6 +28,9 @@ Press enter if this is correct, or CTRL-C to cancel - enter
 -- it will complain about a missing folder, ignore it --
 $ Do you want to replace suspend with hibernate (type yes or no) - no
 $ Do you want use the patched libwacom packages? (type yes or no) - no
+## Additional options appeared for me during this spot, likely due to updates from jakeday
+$ Do you want to remove the example intel xorg config? (type yes or no) - I went with no
+$ Do you want to remove the example pule audio config files? (type yes or no) - Again, I went with no
 -- it will now install IPTS firmware (this will give us touch and pen input!) --
 -- it will install motherboard firmware (i915) --
 -- it will install wifi Marvell firmware (to fix a buggy WiFi connection) --
@@ -37,11 +40,13 @@ $ Do you want this script to download and install the latest kernel for you? (ty
 
 Now we have the firmware in place. Let's now prepare the Linux source to use Jake Day's patches. Check here what is the current supported version of the kernel for which Jake Day has made his patches. At this time it's 4.18.11-1. Remember this version number 4.18.11. Let's now get Linux kernel source code:
 
+### As of writing this (20190227), the latest version is 4.19.23. Commands below updated. Also, cloning the kernel takes a while.
+
 ```
 $ cd ~/kernel-sources
 $ git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
 $ cd linux-stable
-$ git checkout v4.18.11
+$ git checkout v4.19.23
 ```
 
 ## Installing packages needed for source code compilation
@@ -71,7 +76,7 @@ We'll now apply the changes Jake Day has prepared into linux-stable (official Li
 
 ```
 $ cd ~/kernel-sources/linux-stable
-$ for i in ../linux-surface/patches/4.18/*.patch; do patch -p1 < $i; done
+$ for i in ../linux-surface/patches/4.19/*.patch; do patch -p1 < $i; done
 $ cp /boot/config-`uname -r` .config
 ```
 
@@ -87,6 +92,8 @@ This will take some time to complete (bzImage about 20 minutes) + (all modules a
 
 `$ make -j `getconf _NPROCESSORS_ONLN` bzImage; make -j `getconf _NPROCESSORS_ONLN` modules
 Installing kernel and modules`
+
+### Lots of m and y (y on ones that m is not an option for). Also, was asked how many CPUs. Chose 4 on i7-8650U (SB2) and all 8 threads stayed above 80% usage almost constantly and most were near or at 100%.
 
 Assuming compilation went without errors, you can now install them both.
 
@@ -107,6 +114,18 @@ We'll now download and compile the extra ACPI module (thanks to qzed):
 $ cd ~/kernel-sources/linux-stable/drivers
 $ git clone https://github.com/qzed/linux-surfacegen5-acpi-notify.git surfacegen5-acpi-notify
 $ cd surfacegen5-acpi-notify
-$ make
+$ make ##I got ana error here that "No targets specified and no makefile found. Stop." Could not continue.
 $ sudo make dkms-install
 ```
+
+### Ended up after all this with an error that the kernel built has an invalid signature which means I need to sign the kernel thanks to using Secure Boot. Referring to jakeday's article on this: https://github.com/jakeday/linux-surface/blob/master/SIGNING.md
+
+SBSIGN must be installed to do this:
+`dnf install sbsigntools`
+
+Updating Grub on Fedora:
+`grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg`
+
+Used grub-customizer to set and confirm boot order of kernels.
+
+After all this is done, go back and delete the 'kernel-sources' folder under Home.
