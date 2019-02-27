@@ -1,0 +1,24 @@
+Running in xorg session, not wayland.
+
+Gnome-Tweaks
+
+neofetch
+
+gnome themes - shell theme sierra negra
+gtk theme - flat-remix
+icon theme - flat-remix
+
+gparted
+
+nvidia driver
+
+google chrome
+chromium
+
+fedora-prime (nvidia graphics switching via command line) https://github.com/bosim/FedoraPrime
+
+All the extra work to sign the kernel only to turn off secure boot so I don't have to dink around with nvidia driver signing...
+
+Additionally, there's way too much garbage involved in installing NVidia drivers in Fedora for some reason. 
+
+https://www.if-not-true-then-false.com/2015/fedora-nvidia-guide/
