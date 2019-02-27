@@ -4,9 +4,9 @@ I found that someone had posted similar instructions for Fedora 28 and building 
 but I wasn't certain how to do that on my own. Unfortunately, the author took down his Github. Thanks to Google cached pages,
 I was able to find a cached copy of the instructions.
 
-http://webcache.googleusercontent.com/search?q=cache:https://denzilferreira.github.io/microsoft-surface-pro-4-and-fedora-28/
+https://denzilferreira.github.io/microsoft-surface-pro-4-and-fedora-28/
 
-Getting kernel sources: linux-surface + linux-stable
+## Getting kernel sources: linux-surface + linux-stable
 
 Jake Day has done all the hard work for us: here. We'll start by creating a folder to host the source code we will need, one for Jake's patches, one for Linux kernel source. If any of the commands do not work, you may be missing some packages installed on your machine.
 
@@ -44,7 +44,7 @@ $ cd linux-stable
 $ git checkout v4.18.11
 ```
 
-Installing packages needed for source code compilation
+## Installing packages needed for source code compilation
 
 Before we get compiling everything, we need to make sure we have all the libraries we'll ever need to compile drivers and kernel from source.
 
@@ -53,7 +53,7 @@ $ sudo dnf groupinstall "Development Tools" "C Development Tools and Libraries"
 $ sudo dnf install elfutils-devel openssl-devel perl-devel perl-generators pesign ncurses-devel
 ```
 
-Adding support for battery status monitoring
+## Adding support for battery status monitoring
 
 To add support to battery events, you'll need to apply the patches from qzed which add battery monitoring to your desktop. You'll need to do:
 
@@ -65,7 +65,7 @@ $ git checkout master
 $ git merge upstream/master
 ```
 
-Apply patches from linux-surface into linux-stable
+## Apply patches from linux-surface into linux-stable
 
 We'll now apply the changes Jake Day has prepared into linux-stable (official Linux kernel). Then we'll load Fedora's configuration file so we have the same support as officially was bundled.
 
@@ -81,7 +81,7 @@ CONFIG_SERIAL_DEV_CTRL_TTYPORT=y
 
     In the following step "Compiling kernel and modules", make sure to select "m" in the CONFIG_INTEL_IPTS otherwise you'll have errors creating the bzImage. The "m" stands for module, so that's fine!
 
-Compiling kernel and modules
+## Compiling kernel and modules
 
 This will take some time to complete (bzImage about 20 minutes) + (all modules about 45 minutes). Be patient. It will ask you to accept the new modules from Surface Pro 4, shown as (NEW). Press m to have them added as modules for your kernel.
 
@@ -95,7 +95,7 @@ $ sudo make -j `getconf _NPROCESSORS_ONLN` modules_install
 $ sudo make -j `getconf _NPROCESSORS_ONLN` install
 ```
 
-Install battery ACPI module
+## Install battery ACPI module
 
 Install DKMS in Fedora:
 
