@@ -10,13 +10,12 @@ Getting kernel sources: linux-surface + linux-stable
 
 Jake Day has done all the hard work for us: here. We'll start by creating a folder to host the source code we will need, one for Jake's patches, one for Linux kernel source. If any of the commands do not work, you may be missing some packages installed on your machine.
 
+```
 $ cd ~
-
 $ mkdir kernel-sources
-
 $ cd kernel-sources
-
 $ git clone https://github.com/jakeday/linux-surface.git
+```
 
 This will download the list of patches from Jake Day's GitHub repository to make changes to the official Linux kernel. Now we'll use Jake's script to install a few libraries and drivers that will be needed for the kernel compilation to suceed.
 
