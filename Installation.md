@@ -126,6 +126,6 @@ SBSIGN must be installed to do this:
 Updating Grub on Fedora:
 `grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg`
 
-Used grub-customizer to set and confirm boot order of kernels.
+Used grub-customizer to set and confirm boot order of kernels: `sudo dnf install grub-customizer`
 
 After all this is done, go back and delete the 'kernel-sources' folder under Home.
