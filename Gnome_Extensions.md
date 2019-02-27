@@ -17,6 +17,6 @@ While Gtile doesn't offer me the option of dragging a window to a corner of the 
 
 [GPaste](https://github.com/Keruspe/GPaste) - Clipboard manager I'm going to check out.
 
-[TopIcons](https://extensions.gnome.org/extension/1031/topicons/) - For system tray icons for apps that would normally have them, but Gnome doesn't like to show.
+[TopIcons Redux](https://extensions.gnome.org/extension/1497/topicons-redux/) - For system tray icons for apps that would normally have them, but Gnome doesn't like to show.
 
 [CPUFreq](https://extensions.gnome.org/extension/1082/cpufreq/) - Might require TLP, but allows swapping between CPU profiles for more performance or more battery. Either this or TLP Switcher.
