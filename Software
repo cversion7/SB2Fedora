@@ -22,3 +22,5 @@ All the extra work to sign the kernel only to turn off secure boot so I don't ha
 Additionally, there's way too much garbage involved in installing NVidia drivers in Fedora for some reason. 
 
 https://www.if-not-true-then-false.com/2015/fedora-nvidia-guide/
+
+Will need to come back to this another day and try again.
